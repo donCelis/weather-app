@@ -1,14 +1,11 @@
-import { Suspense, lazy } from 'react'
 import FeatherIcon from 'feather-icons-react'
 
 import './weather.css'
 import { useGetCity } from '../../hooks/useGetCity'
 import { Lang } from '../Lang'
+import { Current } from '../Current'
 import { CurrentInfo } from '../CurrentInfo'
-import { Spinner } from '../Spinner'
-
-const Current = lazy(() => import('../Current'))
-const Week = lazy(() => import('../Week'))
+import { Week } from '../Week'
 
 export const Weather = () => {
   const { loading, error } = useGetCity()
@@ -19,15 +16,11 @@ export const Weather = () => {
       )
     : (
       <div className='container'>
-        <Suspense fallback={<Spinner />}>
-          <Current />
-        </Suspense>
+        <Current />
         <div className='info-side'>
           <Lang />
           <CurrentInfo />
-          <Suspense fallback={<Spinner />}>
-            <Week />
-          </Suspense>
+          <Week />
           <div className='location-container'>
             <button
               className='location-button'

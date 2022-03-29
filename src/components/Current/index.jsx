@@ -2,9 +2,9 @@ import FeatherIcon from 'feather-icons-react'
 import { useGlobalState } from '../../context'
 import { useConvertDate } from '../../hooks/useConvertDate'
 
-const Current = () => {
-  const { current, city, location } = useGlobalState()
-  const { convertDay, convertDate } = useConvertDate(location)
+export const Current = () => {
+  const { current, city } = useGlobalState()
+  const { convertDay, convertDate } = useConvertDate()
   return (
     <div className='weather-side'>
       <div className='weather-gradient' />
@@ -28,4 +28,3 @@ const Current = () => {
     </div>
   )
 }
-export default Current
