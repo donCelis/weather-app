@@ -1,34 +1,14 @@
-import { useState, useEffect } from 'react'
 import FeatherIcon from 'feather-icons-react'
 
 import './weather.css'
-import { fetchCity } from '../../utils/fetchCity'
-import { getCoords } from '../../utils/getCoords'
 import { useConvertDate } from '../../hooks/useConvertDate'
+import { useGetCity } from '../../hooks/useGetCity'
 
 export const Weather = () => {
-  const [city, setCity] = useState({})
-  const [current, setCurrent] = useState({})
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState('')
-
+  const { city, current, error, loading, setCurrent } = useGetCity()
   const { convertDate, convertDay } = useConvertDate()
-  const wind = (speed) => Math.round(speed * 3.6)
 
-  useEffect(() => {
-    const data = async () => {
-      try {
-        const { latitude: lat, longitude: lon } = await getCoords()
-        const res = await fetchCity({ lat, lon })
-        setCity(res)
-        setCurrent(res.list[0])
-        setLoading(false)
-      } catch (error) {
-        setError(error)
-      }
-    }
-    Object.keys(city).length === 0 && data()
-  }, [])
+  const wind = (speed) => Math.round(speed * 3.6)
 
   const filterCurrent = (date) => {
     const tmp = city.list.find(({ dt }) => dt === date)
