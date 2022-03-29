@@ -1,4 +1,4 @@
-export const useConvertDate = (lang = 'en') => {
+export const useConvertDate = ({ lang = 'en' }) => {
   const convert = (date, options) =>
     Intl.DateTimeFormat(lang, options).format(new Date(date * 1000))
 
