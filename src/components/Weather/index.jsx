@@ -1,28 +1,17 @@
-import { useState } from 'react'
 import FeatherIcon from 'feather-icons-react'
-import flagEs from '../../assets/es.svg'
-import flagEn from '../../assets/gb.svg'
 
 import './weather.css'
 import { useConvertDate } from '../../hooks/useConvertDate'
 import { useGetCity } from '../../hooks/useGetCity'
+import { Lang } from '../Lang'
+import { useGlobalState } from '../../context'
+import { wind } from '../../utils/wind'
+import { Current } from '../Current'
 
 export const Weather = () => {
-  const [location, setLocation] = useState({ lang: 'en' })
-  const { city, current, error, loading, setCurrent } = useGetCity(location)
-  const { convertDate, convertDay } = useConvertDate(location)
-
-  const wind = (speed) => Math.round(speed * 3.6)
-
-  const filterCurrent = (date) => {
-    const tmp = city.list.find(({ dt }) => dt === date)
-    const isTmp = current.dt !== tmp.dt
-    isTmp && setCurrent(tmp)
-  }
-
-  const changeLanguage = (date) => {
-    setLocation({ ...location, lang: date })
-  }
+  const { location, current, city, filterCurrent } = useGlobalState()
+  const { loading, error } = useGetCity(location)
+  const { convertDay } = useConvertDate(location)
 
   return loading
     ? (
@@ -30,31 +19,9 @@ export const Weather = () => {
       )
     : (
       <div className='container'>
-        <div className='weather-side'>
-          <div className='weather-gradient' />
-          <div className='date-container'>
-            <h2 className='date-dayname'>{convertDay(current.dt)}</h2>
-            <span className='date-day'>{convertDate(current.dt)}</span>
-            <FeatherIcon className='location-icon' icon='map-pin' />
-            <span className='location'>
-              {city.city.name}, {city.city.country}
-            </span>
-          </div>
-          <div className='weather-container'>
-            <img
-              className='weather-icon'
-              src={`http://openweathermap.org/img/wn/${current.weather[0].icon}@2x.png`}
-              alt=''
-            />
-            <h1 className='weather-temp'>{current.temp.day.toFixed(0)}°C</h1>
-            <h3 className='weather-desc'>{current.weather[0].description}</h3>
-          </div>
-        </div>
+        <Current />
         <div className='info-side'>
-          <div className='lang'>
-            <button onClick={() => changeLanguage('en')} className='icon-location'><img src={flagEn} alt='English' /></button>
-            <button onClick={() => changeLanguage('es')} className='icon-location'><img src={flagEs} alt='Spanish' /></button>
-          </div>
+          <Lang />
           <div className='today-info-container'>
             <div className='today-info'>
               <div className='precipitation'>

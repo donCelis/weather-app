@@ -2,10 +2,10 @@ import { useState, useEffect } from 'react'
 
 import { getCoords } from '../utils/getCoords'
 import { fetchCity } from '../utils/fetchCity'
+import { useGlobalState } from '../context'
 
 export const useGetCity = ({ lang }) => {
-  const [city, setCity] = useState({})
-  const [current, setCurrent] = useState({})
+  const { setCurrent, setCity } = useGlobalState()
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
 
@@ -21,8 +21,8 @@ export const useGetCity = ({ lang }) => {
         setError(error)
       }
     }
-    city && data()
+    data()
   }, [lang])
 
-  return { city, current, loading, error, setCurrent }
+  return { loading, error }
 }
