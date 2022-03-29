@@ -1,7 +1,7 @@
 import { useGlobalState } from '../../context'
 import { useConvertDate } from '../../hooks/useConvertDate'
 
-export const Week = () => {
+const Week = () => {
   const { location, city, current, filterCurrent } = useGlobalState()
   const { convertDay } = useConvertDate(location)
 
@@ -27,3 +27,4 @@ export const Week = () => {
     </div>
   )
 }
+export default Week

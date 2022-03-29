@@ -5,10 +5,10 @@ import './weather.css'
 import { useGetCity } from '../../hooks/useGetCity'
 import { Lang } from '../Lang'
 import { CurrentInfo } from '../CurrentInfo'
-import { Week } from '../Week'
 import { Spinner } from '../Spinner'
 
 const Current = lazy(() => import('../Current'))
+const Week = lazy(() => import('../Week'))
 
 export const Weather = () => {
   const { loading, error } = useGetCity()
@@ -25,7 +25,9 @@ export const Weather = () => {
         <div className='info-side'>
           <Lang />
           <CurrentInfo />
-          <Week />
+          <Suspense fallback={<Spinner />}>
+            <Week />
+          </Suspense>
           <div className='location-container'>
             <button
               className='location-button'
