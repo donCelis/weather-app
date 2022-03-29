@@ -4,8 +4,8 @@ import { getCoords } from '../utils/getCoords'
 import { fetchCity } from '../utils/fetchCity'
 import { useGlobalState } from '../context'
 
-export const useGetCity = ({ lang }) => {
-  const { setCurrent, setCity } = useGlobalState()
+export const useGetCity = () => {
+  const { setCurrent, setCity, location } = useGlobalState()
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
 
@@ -13,7 +13,7 @@ export const useGetCity = ({ lang }) => {
     const data = async () => {
       try {
         const { latitude: lat, longitude: lon } = await getCoords()
-        const { city, list } = await fetchCity({ lat, lon, lang })
+        const { city, list } = await fetchCity({ lat, lon, lang: location.lang })
         setCity({ city, list })
         setCurrent(list[0])
         setLoading(false)
@@ -22,7 +22,7 @@ export const useGetCity = ({ lang }) => {
       }
     }
     data()
-  }, [lang])
+  }, [location.lang])
 
   return { loading, error }
 }
