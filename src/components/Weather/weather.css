@@ -202,3 +202,36 @@
   width: 100%;
   vertical-align: middle;
 }
+@media only screen and (max-width: 576px) {
+  body {
+    height: inherit;
+    display: inline-block;
+    padding-top: 2rem;
+  }
+  .container {
+    grid-template-columns: 1fr;
+    height: inherit;
+    background: transparent;
+  }
+  .weather-side {
+    height: 350px;
+    width: 100%;
+    z-index: 1;
+    padding: 2rem;
+  }
+  .date-container,
+  .weather-container {
+    position: relative;
+    inset: inherit;
+  }
+  .info-side {
+    margin: 0;
+    background-color: #222831;
+    padding: 4rem 2rem 2rem;
+    transform: translateY(-2rem);
+  }
+  .weather-side, .info-side{
+    width: 90%;
+    margin: 0 auto;
+  }
+}
