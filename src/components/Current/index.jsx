@@ -19,7 +19,7 @@ export const Current = () => {
       <div className='weather-container'>
         <img
           className='weather-icon'
-          src={`http://openweathermap.org/img/wn/${current.weather[0].icon}@2x.png`}
+          src={`https://openweathermap.org/img/wn/${current.weather[0].icon}@2x.png`}
           alt=''
         />
         <h1 className='weather-temp'>{current.temp.day.toFixed(0)}°C</h1>
