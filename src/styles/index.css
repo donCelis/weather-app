@@ -22,9 +22,6 @@ body {
 .container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  border-radius: 25px;
-  box-shadow: 0 0 70px -10px rgba(0, 0, 0, 0.2);
-  background-color: #222831;
   color: #ffffff;
   height: 400px;
 }
@@ -37,4 +34,16 @@ nav{
 a{
   color: white;
   margin: 1rem;
+}
+@media only screen and (max-width: 576px) {
+  body {
+    height: inherit;
+    display: inline-block;
+    padding-top: 2rem;
+  }
+  .container {
+    grid-template-columns: 1fr;
+    height: inherit;
+    background: transparent;
+  }
 }

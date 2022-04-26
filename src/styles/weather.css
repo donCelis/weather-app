@@ -1,5 +1,6 @@
 .weather-side {
   position: relative;
+  z-index: 1;
   height: 100%;
   border-radius: 25px;
   background-image: url("https://images.unsplash.com/photo-1559963110-71b394e7494d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=675&q=80");
@@ -78,6 +79,9 @@
 }
 
 .info-side {
+  border-radius: 0 25px 25px 0;
+  box-shadow: 0 0 70px -10px rgba(0, 0, 0, 0.2);
+  background-color: #222831;
   position: relative;
   margin-left: -1.6rem;
   height: 100%;
@@ -203,16 +207,6 @@
   vertical-align: middle;
 }
 @media only screen and (max-width: 576px) {
-  body {
-    height: inherit;
-    display: inline-block;
-    padding-top: 2rem;
-  }
-  .container {
-    grid-template-columns: 1fr;
-    height: inherit;
-    background: transparent;
-  }
   .weather-side {
     height: 350px;
     width: 100%;
@@ -229,6 +223,7 @@
     background-color: #222831;
     padding: 4rem 2rem 2rem;
     transform: translateY(-2rem);
+    border-radius: 25px;
   }
   .weather-side, .info-side{
     width: 90%;

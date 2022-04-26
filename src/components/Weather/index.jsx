@@ -1,6 +1,6 @@
 import FeatherIcon from 'feather-icons-react'
 
-import './weather.css'
+import '../../styles/weather.css'
 import { useGetCity } from '../../hooks/useGetCity'
 import { Lang } from '../Lang'
 import { Current } from '../Current'
